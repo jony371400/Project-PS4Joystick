@@ -18,7 +18,6 @@ def callback(data):
         twist.linear.x = 0
         twist.angular.z =0
 
-    
     print('speed: %.2f, turn: %.2f'%(twist.linear.x,twist.angular.z))
     pub.publish(twist)
 
@@ -29,7 +28,7 @@ def FromJoyToTurtle():
     pub = rospy.Publisher('turtle1/cmd_vel',Twist,queue_size=10)
     sub = rospy.Subscriber('joy',Joy ,callback)
     
-    rospy.init_node('ChangeJoyToTurtle',anonymous=True)
+    rospy.init_node('PS4_Joystick_Control_turtlesim',anonymous=False)
     rospy.spin()
 
 
