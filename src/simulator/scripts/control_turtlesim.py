@@ -6,6 +6,7 @@ import rospy
 from sensor_msgs.msg import Joy
 #烏龜接收的message格式
 from geometry_msgs.msg import Twist
+from std_srvs.srv import *
 
 
 def callback(data):
@@ -17,6 +18,10 @@ def callback(data):
     if (data.buttons[2]==1):
         twist.linear.x = 0
         twist.angular.z =0
+
+    if (data.buttons[1]==1):
+        ServiceProxy = rospy.ServiceProxy('clear', Empty  ,persistent=False, headers=None)
+        ServiceProxy()
 
     print('speed: %.2f, turn: %.2f'%(twist.linear.x,twist.angular.z))
     pub.publish(twist)
